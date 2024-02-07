@@ -41,6 +41,6 @@ Keep an eye on this space for updates, progress reports, and insights into our d
 </td>
 <td>
 
-![mrp_other](https://github.com/ISL-INTELLIGENT-SYSTEMS-LAB/MultiRobotPerception/assets/132487613/352f37c5-e5d5-4b7a-b210-bbe560de415b)
+![mrp_other](https://github.com/ISL-INTELLIGENT-SYSTEMS-LAB/MultiRobotPerception/assets/132487613/a921b7b4-624f-4f0c-8864-042f7d3937c8)
 
 </td>
