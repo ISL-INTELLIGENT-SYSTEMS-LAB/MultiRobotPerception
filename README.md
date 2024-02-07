@@ -22,6 +22,7 @@ Keep an eye on this space for updates, progress reports, and insights into our d
 <th>Networking</th>
 <th>Turtlebots & Drones</th>
 <th>ROS-Unity Bridge</th>
+<th>Object Matching</th>
 <th>Other</th>
 </tr>
 <td>
@@ -37,6 +38,11 @@ Keep an eye on this space for updates, progress reports, and insights into our d
 <td>
 
 ![MRP_ros_unity](https://github.com/ISL-INTELLIGENT-SYSTEMS-LAB/MultiRobotPerception/assets/132487613/84a53896-f5d5-4ee2-bc2b-0cc820d3a9c8)
+
+</td>
+<td>
+
+![MRP_object_matching](https://github.com/ISL-INTELLIGENT-SYSTEMS-LAB/MultiRobotPerception/assets/132487613/0997ce23-a01a-4567-8c7d-1b44b7a1688a)
 
 </td>
 <td>
