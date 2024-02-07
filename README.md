@@ -1,4 +1,4 @@
-# TurtleBotZedMatching
+# Multi-Robot Perception
 
 ### Mission Overview
 Empowering collaborative autonomy across ground-based robots and aerial drones, our project seeks to establish seamless communication and coordination, enabling these diverse robotic agents to work synergistically in dynamic environments. Through advanced algorithms and innovative technology, we aim to drive forward the frontiers of robotic exploration and intervention.
