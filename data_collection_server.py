@@ -8,6 +8,7 @@ import ipaddress
 from datetime import datetime
 import traceback
 import sys
+from network_relation import NetworkRelation as nr
 
 def get_server_ip():
     """
@@ -252,6 +253,6 @@ def main():
         show_traceback = input("\nKeyboardInterrupt occurred. Do you want to see the traceback? (y/n): ")
         if show_traceback.lower() == 'y':
             traceback.print_exc()
-
+    network_dir = nr(create_dataframe_directory(), create_experiment_directory())
 if __name__ == "__main__":
     main()
