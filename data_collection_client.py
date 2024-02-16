@@ -101,19 +101,19 @@ def create_collection_directory():
 n
 n
     Returns:
-    str: The absolute path to the 'IMPACT_Collection' directory.
+    str: The absolute path to the 'Turtlebot_Collection' directory.
 
     The function first gets the path to the current user's home directory using the 'os.path.expanduser("~")' function and appends 'Documents' to it.
-    It then appends 'IMPACT_Collection' to this path to get the path to the 'IMPACT_Collection' directory.
-    The 'os.makedirs' function is used to create the 'IMPACT_Collection' directory. The 'exist_ok=True' argument means that the function will not raise an error if the directory already exists.
+    It then appends 'Turtlebot_Collection' to this path to get the path to the 'Turtlebot_Collection' directory.
+    The 'os.makedirs' function is used to create the 'Turtlebot_Collection' directory. The 'exist_ok=True' argument means that the function will not raise an error if the directory already exists.
     The function then prints a message to the console indicating where the collected data will be stored.
-    Finally, the function returns the path to the 'IMPACT_Collection' directory.
+    Finally, the function returns the path to the 'Turtlebot_Collection' directory.
     """
     # Define the base directory path
     base_dir_path = os.path.join(os.path.expanduser("~"), "Documents")
-    # Create a path to the 'IMPACT_Collection' directory
-    collection_dir_path = os.path.join(base_dir_path, 'IMPACT_Collection')
-    # Create the 'IMPACT_Collection' directory if it doesn't exist
+    # Create a path to the 'Turtlebot_Collection' directory
+    collection_dir_path = os.path.join(base_dir_path, 'Turtlebot_Collection')
+    # Create the 'Turtlebot_Collection' directory if it doesn't exist
     os.makedirs(collection_dir_path, exist_ok=True)
     # Return the path
     return collection_dir_path
