@@ -50,7 +50,7 @@ def create_collection_dir():
     Finally, the function returns the path to the 'Turtlebot_Collection' directory.
     """
     # Get the home directory
-    home_dir = os.path.expanduser("~")
+    home_dir = os.path.join(os.path.expanduser("~"), "Documents"
     # Create a path to the 'Turtlebot_Collection' directory
     collection_dir_path = os.path.join(home_dir, 'Turtlebot_Collection')
     # Create the directory if it doesn't exist
