@@ -49,7 +49,6 @@ ros2action==0.9.13
 ros2bag==0.3.11
 ros2cli==0.9.13
 ros2component==0.9.13
-ros2controlcli==0.11.0
 ros2doctor==0.9.13
 ros2interface==0.9.13
 ros2launch==0.11.7
