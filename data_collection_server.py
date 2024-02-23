@@ -8,7 +8,7 @@ import ipaddress
 from datetime import datetime
 import traceback
 import sys
-from network_relation import NetworkRelation as nr
+#from network_relation import NetworkRelation as nr
 
 def get_server_ip():
     """
@@ -40,19 +40,19 @@ def create_collection_dir():
     Parameters: None
     
     Returns:
-    str: The absolute path to the 'IMPACT_Collection' directory.
+    str: The absolute path to the 'Turtlebot_Collection' directory.
     
     The function first gets the path to the user's home directory using the os.path.expanduser function. 
-    It then creates a path to the 'IMPACT_Collection' directory by joining the home directory path with the string 'collection'.
-    The os.makedirs function is used to create the 'IMPACT_Collection' directory. The exist_ok parameter is set to True, 
+    It then creates a path to the 'Turtlebot_Collection' directory by joining the home directory path with the string 'collection'.
+    The os.makedirs function is used to create the 'Turtlebot_Collection' directory. The exist_ok parameter is set to True, 
     which means that the function will not raise an error if the directory already exists.
-    The path to the 'IMPACT_Collection' directory is then printed to the console.
-    Finally, the function returns the path to the 'IMPACT_Collection' directory.
+    The path to the 'Turtlebot_Collection' directory is then printed to the console.
+    Finally, the function returns the path to the 'Turtlebot_Collection' directory.
     """
     # Get the home directory
-    home_dir = os.path.expanduser("~")
-    # Create a path to the 'IMPACT_Collection' directory
-    collection_dir_path = os.path.join(home_dir, 'IMPACT_Collection')
+    home_dir = os.path.join(os.path.expanduser("~"), "Documents")
+    # Create a path to the 'Turtlebot_Collection' directory
+    collection_dir_path = os.path.join(home_dir, 'Turtlebot_Collection')
     # Create the directory if it doesn't exist
     os.makedirs(collection_dir_path, exist_ok=True)
     # Return the path
@@ -253,6 +253,6 @@ def main():
         show_traceback = input("\nKeyboardInterrupt occurred. Do you want to see the traceback? (y/n): ")
         if show_traceback.lower() == 'y':
             traceback.print_exc()
-    network_dir = nr(create_dataframe_directory(), create_experiment_directory())
+    #network_dir = nr(create_dataframe_directory(), create_experiment_directory())
 if __name__ == "__main__":
     main()

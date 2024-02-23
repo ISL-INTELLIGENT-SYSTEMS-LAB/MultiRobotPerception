@@ -59,7 +59,6 @@ def get_network_cidr(interface_name='wlan0'):
 
     return None
 
-
 def get_server_address():
     """
     Retrieves the IP addresses of all devices in the same network using nmap and prompts the user to choose one.
@@ -616,7 +615,10 @@ def collect_and_process_data(zed, runtime_params, objects, obj_runtime_param, po
 # Main function
 def main():
     # Get the server address
-    server_address = get_server_address()
+    # server_address = get_server_address()
+    print("Please enter a Server IP address (ex: 192.168.0.XX):")
+    server_IP = input()
+    server_address = (server_IP, 1666)
     # Initialize the ZED camera
     zed = initialize_camera()
     # Set the runtime parameters for the ZED camera
