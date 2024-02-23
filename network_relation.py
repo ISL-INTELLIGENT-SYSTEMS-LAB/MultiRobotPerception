@@ -68,15 +68,15 @@ class InputFileException(Exception):
                         print(correspondence_df)
                         correspondence_df.to_csv(self.root + 'output_relation.csv')
                         return [temp.to_numpy()[cols, rows].sum(), cols]
-
+                        
                 def main(self):
                         experiment_name = r'Exp1A/'
                         final_filepath = self.root + experiment_name
                         self.files = [filename for filename in os.listdir(final_filepath) if (filename.endswith('.csv') and not filename.startswith('output'))]
                         print(self.network_relation())
 
-
-
-
 if __name__ == '__main__':
-    main()
+    root = "/path/to/your/directory/"  # replace with your actual directory
+    files = []  # initially empty, will be filled in main method
+    nr = NetworkRelation(root, files)
+    nr.main()
