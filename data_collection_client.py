@@ -31,7 +31,9 @@ def get_client_ip(network_interface='wlan0'):
     try:
         # Get the IP address of the network interface
         ip_address = ni.ifaddresses(network_interface)[ni.AF_INET][0]['addr']
-        return ip_address
+        two_digit_ip = ip_address.split('.')[-1]
+        return ip_address, two_digit_ip
+    
     except ValueError:
         print(f"No IP address found for interface {network_interface}")
         return None
@@ -60,7 +62,7 @@ def get_network_cidr(interface_name='wlan0'):
     return None
 
 
-def get_server_address():
+def get_server_address(client_ip):
     """
     Retrieves the IP addresses of all devices in the same network using nmap and prompts the user to choose one.
 
@@ -86,7 +88,6 @@ def get_server_address():
             choice = int(choice) - 1
             ip_address = ips[choice]
             port = 16666
-            client_ip = get_client_ip()
             print(f"\nClient IP: {client_ip}, Server IP: {ip_address}")
             return (ip_address, port)
 
@@ -151,7 +152,7 @@ def create_experiment_directory():
     return experiment_dir_path
 
 
-def create_filename():
+def create_filename(nano_id):
     """
     Creates the filename for the current experiment.
 
@@ -164,7 +165,7 @@ def create_filename():
     # Get the current time
     timestamp = datetime.now(pytz.timezone('US/Eastern')).strftime("%H:%M:%S")
     # Return the filename
-    return f'{timestamp}_data_transmission'
+    return f'{timestamp}_nano{nano_id}_data_transmission'
 
 
 # Function to initialize the camera and set its parameters
@@ -372,7 +373,7 @@ def create_sdk_output_objects(zed):
 
 
 # Function to capture data from the ZED camera and save it to files
-def capture_data(zed, dir_path, runtime_params, objects, obj_runtime_param, point_cloud, image_left, display_resolution, cam_w_pose, lock):
+def capture_data(zed, dir_path, runtime_params, objects, obj_runtime_param, point_cloud, image_left, display_resolution, cam_w_pose, lock, nano_id):
     """
     Captures data from the ZED camera and saves it to files.
 
@@ -412,7 +413,7 @@ def capture_data(zed, dir_path, runtime_params, objects, obj_runtime_param, poin
                 trans = cam_w_pose.get_translation().get()
                 rot = cam_w_pose.get_euler_angles()
                 # Creates the filename
-                filename = create_filename()
+                filename = create_filename(nano_id)
                 # Retrieve the point cloud from the ZED camera
                 zed.retrieve_measure(point_cloud, sl.MEASURE.XYZRGBA, sl.MEM.CPU, display_resolution)
                 # Write the point cloud to a file
@@ -566,7 +567,7 @@ def send_data_to_server(serialized_data, server_ip, server_port):
     # Close the socket
     client_socket.close()
 
-def collect_and_process_data(zed, runtime_params, objects, obj_runtime_param, point_cloud, image_left, display_resolution, cam_w_pose, lock, stop, server_address):
+def collect_and_process_data(zed, runtime_params, objects, obj_runtime_param, point_cloud, image_left, display_resolution, cam_w_pose, lock, stop, server_address, nano_id):
     """
     Collects and processes data from the ZED camera.
 
@@ -595,7 +596,7 @@ def collect_and_process_data(zed, runtime_params, objects, obj_runtime_param, po
         # Wait for the user to move the camera and press Enter
         input("Move the camera to a new location and press Enter to process data:\n")
         # Capture data from the ZED camera
-        objects, filename = capture_data(zed, dir_path, runtime_params, objects, obj_runtime_param, point_cloud, image_left, display_resolution, cam_w_pose, lock)
+        objects, filename = capture_data(zed, dir_path, runtime_params, objects, obj_runtime_param, point_cloud, image_left, display_resolution, cam_w_pose, lock, nano_id)
         # If objects were detected and a filename was generated
         if objects and filename:
             # Process the detected objects
@@ -615,8 +616,10 @@ def collect_and_process_data(zed, runtime_params, objects, obj_runtime_param, po
 
 # Main function
 def main():
+    # Get the client's IP address
+    client_ip, nano_id = get_client_ip()
     # Get the server address
-    server_address = get_server_address()
+    server_address = get_server_address(client_ip)
     # Initialize the ZED camera
     zed = initialize_camera()
     # Set the runtime parameters for the ZED camera
@@ -636,7 +639,7 @@ def main():
     # Create the SDK output objects for the ZED camera
     point_cloud, objects, image_left, display_resolution, cam_w_pose = create_sdk_output_objects(zed)
     # Collect and process data from the ZED camera
-    collect_and_process_data(zed, runtime_params, objects, obj_runtime_param, point_cloud, image_left, display_resolution, cam_w_pose, lock, stop, server_address)
+    collect_and_process_data(zed, runtime_params, objects, obj_runtime_param, point_cloud, image_left, display_resolution, cam_w_pose, lock, stop, server_address, nano_id)
     # Free the memory used by the image_left object
     image_left.free(sl.MEM.CPU)
     # Free the memory used by the point_cloud object
