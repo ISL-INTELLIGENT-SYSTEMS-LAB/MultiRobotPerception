@@ -15,25 +15,26 @@ import pandas as pd
 import math
 import time
 from utils import *
+import os
 
 class InputFileException(Exception):
         """ This class is run when there is an issue with the input files """
 
 
-        class NetworkRelation:
-                def __init__(self, root, files):
-                        self.root = root
-                        self.files = files
+class NetworkRelation:
+        def __init__(self, root, files):
+                self.root = root
+                self.files = files
 
-                def get_data_frames(self):
-                        data_frames = []
-                        for file in self.files:
-                                data_frames.append(get_data(self.root, file))
-                        max_objects_detected = max([len(df['Object']) for df in data_frames])
-                        for df in data_frames:
-                                while df.shape[0] != max_objects_detected:
-                                        df.loc[len(df.index)] = [None] * len(df.loc[0])
-                        return data_frames, max_objects_detected
+        def get_data_frames(self):
+                data_frames = []
+                for file in self.files:
+                        data_frames.append(get_data(self.root, file))
+                max_objects_detected = max([len(df['Object']) for df in data_frames])
+                for df in data_frames:
+                        while df.shape[0] != max_objects_detected:
+                                df.loc[len(df.index)] = [None] * len(df.loc[0])
+                return data_frames, max_objects_detected
 
                 def network_relation(self):
                         start = time.time()
@@ -68,7 +69,7 @@ class InputFileException(Exception):
                         print(correspondence_df)
                         correspondence_df.to_csv(self.root + 'output_relation.csv')
                         return [temp.to_numpy()[cols, rows].sum(), cols]
-                        
+
                 def main(self):
                         experiment_name = r'Exp1A/'
                         final_filepath = self.root + experiment_name
