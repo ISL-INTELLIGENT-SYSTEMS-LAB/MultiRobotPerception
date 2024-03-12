@@ -143,7 +143,7 @@ def get_loss_2box(bbox1, classconf1, bbox2, classconf2):
 		bbox2 = torch.tensor(np.array([bbox2])).float()
 	except:
 		return 2147483647
-
+	
 	## If the class confidences are not in the 0 to 1 range, divide them by 100 
 	if classconf1 > 1:
 	      classconf1 = classconf1/100
